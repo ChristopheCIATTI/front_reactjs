@@ -36,3 +36,18 @@
     transform: rotate(360deg);
   }
 }
+
+.modal {
+  border-radius: 0.5em;
+  padding: 1em;
+  text-align: center;
+  background: #007fff;
+  box-shadow : 0 0 10px #000000;
+  position: fixed;
+  width: 20%;
+  top: 25%;
+  left: 80%;
+  letter-spacing: .1em;
+  transition:left 1s, opacity 1s;
+  text-shadow: 0 0 1px #000000;
+}

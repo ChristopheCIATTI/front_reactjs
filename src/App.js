@@ -1,24 +1,44 @@
+import 'bootstrap/dist/css/bootstrap.min.css';
+import $ from 'jquery';
 import logo from './logo.svg';
 import './App.css';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+} from "react-router-dom";
+import Home from './pages/home';
+import NewPart from './pages/newPart';
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import CreatePieceCommerciale from './pages/createPieceCommerciale';
+import CreatePieceExterieure from './pages/createPieceExterieure';
+import CreatePieceIntermediaire from './pages/createPieceIntermediaire';
+import PieceCommerciale from './pages/pieceCommerciale';
+import Header from './components/header/header';
+import Piece from './pages/piece';
+import Atelier from './pages/atelier';
 
 function App() {
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Router>
+        <Header />
+        <main className="container">
+          <Switch>
+            <Route path="/newpart/piece commerciale" component={CreatePieceCommerciale}/>
+            <Route path="/newpart/piece exterieure" component={CreatePieceExterieure}/>
+            <Route path="/newpart/piece intermediaire" component={CreatePieceIntermediaire}/>
+            <Route path="/pieceCommerciale" component={PieceCommerciale}/>
+            <Route path="/newpart" component={NewPart}/>
+            <Route path="/pieces" component={Piece}/>
+            <Route path="/atelier" component={Atelier}/>
+            <Route path="/" component={Home}/>
+          </Switch>
+        </main>
+      </Router>
+    </>
   );
 }
 
