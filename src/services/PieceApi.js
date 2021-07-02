@@ -3,6 +3,7 @@ const PIECE_INTERMEDIAIRE_URL = "https://localhost:8000/api/piece_intermediaire"
 const PIECE_EXTERIEURE_URL = "https://localhost:8000/api/piece_exterieure"
 const PIECE_COMMERCIAL_INTERMEDIAIRE_URL = "https://localhost:8000/api/piece_commerciale_piece_intermedaire"
 const PIECE_COMMERCIAL_EXTERIEURE_URL = "https://localhost:8000/api/piece_commerciale_piece_exterieure"
+const PIECE_COMMERCIAL_NAME_URL = "https://localhost:8000/api/piece_commerciale/name"
 const ADD_COMMERCIAL_INTERMEDIAIRE_URL = "https://localhost:8000/api/piece_commerciale_piece_intermedaire"
 const PIECE_COMMERCIALE_MATIRER_PREMIERE_URL = "https://localhost:8000/api/matiere_premiere_piece_commerciale"
 const MATIERE_PREMIERE_URL = "https://localhost:8000/api/matiere_premiere"
@@ -261,4 +262,21 @@ export function getPIPieceIntermedaireById(piece) {
         .then(response => {resolve(response.json())})
         .catch(error => reject(error))
     })
+}
+
+export function getPieceIdByName(object) {
+    let headers = new Headers()
+    headers.set('accept', 'application/json')
+
+    console.log(object)
+    /*
+    return new Promise((resolve, reject) => {
+        fetch(`${PIECE_COMMERCIAL_NAME_URL}/${piece.id}`, {
+            method: "GET",
+            headers: headers
+        })
+        .then(response => {resolve(response.json())})
+        .catch(error => reject(error))
+    })
+    */
 }

@@ -6,7 +6,8 @@ export default function Header() {
     const menu = [
         {name: "Home", url: "/"},
         {name: "Gestion des pieces", url: "/pieces"},
-        {name: "Creation de pieces", url: "/nouvelle_pieces"}
+        {name: "Creation de pieces", url: "/nouvelle_pieces"},
+        {name: "Commande", url: "/commande"}
     ]
 
     return(
@@ -17,6 +18,7 @@ export default function Header() {
     <Nav className="mr-auto">
       <Nav.Link href="/pieces">Gestion des pieces</Nav.Link>
       <Nav.Link href="/atelier">Fabrication des pieces</Nav.Link>
+      <Nav.Link href="/commande">Commandes & devis </Nav.Link>
     </Nav>
   </Navbar.Collapse>
 </Navbar>

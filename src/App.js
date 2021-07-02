@@ -18,6 +18,7 @@ import PieceCommerciale from './pages/pieceCommerciale';
 import Header from './components/header/header';
 import Piece from './pages/piece';
 import Atelier from './pages/atelier';
+import Commande from './pages/commande';
 
 function App() {
 
@@ -34,6 +35,7 @@ function App() {
             <Route path="/newpart" component={NewPart}/>
             <Route path="/pieces" component={Piece}/>
             <Route path="/atelier" component={Atelier}/>
+            <Route path="/commande" component={Commande}/>
             <Route path="/" component={Home}/>
           </Switch>
         </main>

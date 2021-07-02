@@ -9,7 +9,7 @@ import CreatePiecePopup from "../components/piecePopup/createPiecePopup";
 import ReadPiecePopup from "../components/piecePopup/readPiecePopup";
 import CreatePieceInte from "../components/piecePopup/createPieceInte";
 import CreatePieceExte from "../components/piecePopup/createPieceExtePopup";
-import { Button } from "react-bootstrap";
+import { Button, Table } from "react-bootstrap";
 import ReadPieceIntePopup from "../components/piecePopup/readPieceIntePopup";
 
 export default function Piece() {
@@ -106,14 +106,14 @@ export default function Piece() {
                 <td>{piecesCommerciale[piece].quantity}</td>
                 <th>Prix</th>
                 <td>{piecesCommerciale[piece].price}</td>
-                <td><button onClick={setPopupReadToTrue}>Voir la piece</button></td>            
-                <td><button onClick={setPopupEditToTrue}>Editer</button>
+                <td><Button variant="outline-dark" onClick={setPopupReadToTrue}>Voir la piece</Button></td>            
+                <td><Button variant="outline-dark" onClick={setPopupEditToTrue}>Editer</Button>
                 </td>
-                <td><button onClick={setPopupDeleteToTrue}>Supprimer</button></td>
+                <td><Button variant="outline-dark" onClick={setPopupDeleteToTrue}>Supprimer</Button></td>
             </tr>
             
             {<Modal isOpen={popupRead} id={piecesCommerciale[piece].id}>
-            <button onClick={setPopupReadToFalse}>X</button>
+            <Button variant="outline-light" onClick={setPopupReadToFalse}>&#x274c;</Button>
             <ReadPiecePopup 
                 id={piecesCommerciale[piece].id}
                 name={piecesCommerciale[piece].name}
@@ -124,7 +124,7 @@ export default function Piece() {
             </Modal>
             }
             <Modal isOpen={popupEdit}>
-            <button onClick={setPopupEditToFalse}>X</button>
+            <Button variant="outline-light" onClick={setPopupEditToFalse}>&#x274c;</Button>
             <EditPiecePopup 
                 name={piecesCommerciale[piece].name}
                 quantity={piecesCommerciale[piece].quantity}
@@ -134,7 +134,7 @@ export default function Piece() {
                 />
             </Modal>
             <Modal isOpen={popupDelete}>
-            <button onClick={setPopupDeleteToFalse}>X</button>
+            <Button variant="outline-light" onClick={setPopupDeleteToFalse}>&#x274c;</Button>
             <DeletePiecePopup
                 id={piecesCommerciale[piece].id}/>
             <button onClick={setPopupDeleteToFalse}>Annuler</button>
@@ -150,10 +150,10 @@ export default function Piece() {
                 <td>{piecesIntermediaire[piece].name}</td>
                 <th>Quantité</th>
                 <td>{piecesIntermediaire[piece].quantity}</td>
-                <td><button onClick={setPopInteRead}>Voir la piece</button></td>            
+                <td><Button variant="outline-dark" onClick={setPopInteRead}>Voir la piece</Button></td>            
             </tr>
             <Modal isOpen={popInteRead}>
-                <button onClick={setPopupPIeceInteReadToFalse}>X</button>
+                <Button variant="outline-light" onClick={setPopupPIeceInteReadToFalse}>&#x274c;</Button>
                 <ReadPieceIntePopup
                  id={piecesIntermediaire[piece].id}
                  name={piecesIntermediaire[piece].name}
@@ -180,11 +180,66 @@ export default function Piece() {
                 <th>
                     Pieces Commerciale
                 </th>
+                {/* <th>
+                    <Button onClick={setPopupCreateToTrue} variant="dark">Nouvelle piece</Button>
+                </th> */}
+                <Modal isOpen={popupCreate}>
+                    <Button variant="outline-light" onClick={setPopupCreateToFalse}>&#x274c;</Button>
+                    <CreatePiecePopup/>
+                </Modal>
+                
+                <Table>
+                    <tbody>
+                        {piecesCommercialeTr}
+                    </tbody>
+                </Table>
+                <th>
+                    Pieces Intermediaire
+                </th>
+                {/*<th>
+                    <Button variant="dark" onClick={setPopupCreatePieceInteToTrue}>Nouvelle piece</Button>
+                </th>*/}
+                <Modal isOpen={popCreatePieceInte}>
+                    <Button variant="outline-light" onClick={setPopupCreatePieceInteToFalse}>&#x274c;</Button>
+                    <CreatePieceInte/>
+                </Modal>
+                <Table id="indexPiecesIntermediaireTable">
+                    <tbody id="itemIndexPiecesIntermediaireTable">
+                        {piecesIntermediaireTr}
+                    </tbody>
+                </Table>
+                <th>
+                    Pieces Exterieure
+                </th>
+                {/* <th>
+                    <Button variant="dark" onClick={setPopupCreatePieceExteToTrue}>Nouvelle piece</Button>
+                </th> */}
+                
+                {/*<Modal isOpen={popCreatePieceInte}>
+                    <button onClick={setPopupCreatePieceExteToFalse}>X</button>
+                    <CreatePieceExte/>
+                </Modal>*/}
+                <Table id="indexPiecesExterieureTable">
+                    <tbody id="itemIndexPiecesExterieureTable">
+                        {piecesExterieureTr}
+                    </tbody>
+                </Table>
+            </section>
+        </>
+    )
+}
+
+/**
+ * <HeaderPiece/>
+            <section>
+                <th>
+                    Pieces Commerciale
+                </th>
                 <th>
                     <Button onClick={setPopupCreateToTrue} variant="dark">Nouvelle piece</Button>
                 </th>
                 <Modal isOpen={popupCreate}>
-                    <button onClick={setPopupCreateToFalse}>X</button>
+                    <Button variant="outline-light" onClick={setPopupCreateToFalse}>&#x274c;</Button>
                     <CreatePiecePopup/>
                 </Modal>
                 <table id="indexPiecesCommercialeTable">
@@ -196,10 +251,10 @@ export default function Piece() {
                     Pieces Intermediaire
                 </th>
                 <th>
-                    <button onClick={setPopupCreatePieceInteToTrue}>Nouvelle piece</button>
+                    <Button variant="dark" onClick={setPopupCreatePieceInteToTrue}>Nouvelle piece</Button>
                 </th>
                 <Modal isOpen={popCreatePieceInte}>
-                    <button onClick={setPopupCreatePieceInteToFalse}>X</button>
+                    <Button variant="outline-light" onClick={setPopupCreatePieceInteToFalse}>&#x274c;</Button>
                     <CreatePieceInte/>
                 </Modal>
                 <table id="indexPiecesIntermediaireTable">
@@ -211,19 +266,17 @@ export default function Piece() {
                     Pieces Exterieure
                 </th>
                 <th>
-                    <button onClick={setPopupCreatePieceExteToTrue}>Nouvelle piece</button>
+                    <Button variant="dark" onClick={setPopupCreatePieceExteToTrue}>Nouvelle piece</Button>
                 </th>
                 
                 {/*<Modal isOpen={popCreatePieceInte}>
                     <button onClick={setPopupCreatePieceExteToFalse}>X</button>
                     <CreatePieceExte/>
-                </Modal>*/}
-                <table id="indexPiecesExterieureTable">
+                </Modal>*//*}
+                /*<table id="indexPiecesExterieureTable">
                     <tbody id="itemIndexPiecesExterieureTable">
                         {piecesExterieureTr}
                     </tbody>
                 </table>
             </section>
-        </>
-    )
-}
+ */

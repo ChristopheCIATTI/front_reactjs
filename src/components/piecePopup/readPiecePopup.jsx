@@ -14,6 +14,7 @@ import {
     getAllMP} from "../../services/PieceApi"
 import EditInput from "../form/editInput"
 import EditQuantityPieceInte from "./EditQuantityPieceInte"
+import { Button, Form, Table } from "react-bootstrap";
 
 const INPUT_TIMEOUT = 250
 
@@ -271,8 +272,8 @@ export default function ReadPiecePopup(piece) {
             <td>{pcidArray[piece].name}</td>
             <th>Quantité</th>
             <td>{pcidArray[piece].quantiy}</td>
-            <td onClick={setPopEditQuantityPieceInte}><button>Editer</button></td>
-            <td><button onClick={deletePieceInte(pcidArray[piece])}>Supprimer</button></td>
+            <td onClick={setPopEditQuantityPieceInte}><Button variant="secondary">Editer</Button></td>
+            <td><Button variant="danger" onClick={deletePieceInte(pcidArray[piece])}>Supprimer</Button></td>
             <Modal isOpen={editQuantity}>
             <   button onClick={editQuantityPieceInteToFalse}>X</button>
             <EditQuantityPieceInte
@@ -301,9 +302,6 @@ export default function ReadPiecePopup(piece) {
         pieceMPTr.push(
             
         )
-        /*pieceMPTr.push(
-
-        )*/
     }
 
     return(
@@ -312,7 +310,7 @@ export default function ReadPiecePopup(piece) {
                 Visualisation piece
             </h3>
             <div>
-            <table>
+            <Table>
                 <tbody>
                     <th>Nom de la piece</th>
                     <td>{piece.name}</td>
@@ -323,26 +321,27 @@ export default function ReadPiecePopup(piece) {
                     <th>Prix</th>
                     <td>{piece.price}</td>
                 </tbody>
-            </table>
+            </Table>
             </div>
             <div>
                 <div>
-                    <h3>
+                    <h4>
                         Ajouter une piece intermediaire
                         <form onSubmit={handleSubmitAddPieceIntermediaire}>
-                            <label htmlFor="name">Nom: </label>
+                           
+                            <Form.Label htmlFor="name">Nom:</Form.Label>
                             <input name="name" type="text" defaultValue={piecesIntermediairePrediction.value} onChange={handeChangeAddPieceIntermediaire} placeholder="pieceXXX" required/>
                             <label htmlFor="quantity">Quantité</label>
                             <input name="quantity" type="number" defaultValue="0" onChange={handeChangeAddPieceIntermediaire} placeholder="0" required/>
-                            <button>Ajouter!</button>
+                            <Button variant="dark">Ajouter!</Button>
                         </form>
                         {dataPieceIntermedaire.map((item, index) => {
                                 <span key={index + item}>{item}</span>
                             })}
-                    </h3>
+                    </h4>
                 </div>
                 <div>
-                    <h3>
+                    <h4>
                         Ajouter une piece Exterieure
                     
                     <form onSubmit={handleSubmitAddPieceExterieure}>
@@ -350,21 +349,21 @@ export default function ReadPiecePopup(piece) {
                         <input name="name" type="text" defaultValue={piecesIntermediairePrediction.value} onChange={handeChangeAddPieceExterieure} placeholder="pieceXXX" required/>
                         <label htmlFor="quantity">Quantité</label>
                         <input name="quantity" type="number" defaultValue="0" onChange={handeChangeAddPieceExterieure} placeholder="0" required/>
-                        <button>Ajouter!</button>
+                        <Button variant="dark">Ajouter!</Button>
                     </form>
-                    </h3>
+                    </h4>
                 </div>
                 <div>
-                    <h3>
+                    <h4>
                         Ajouter des matieres
-                    </h3>
                     <form onSubmit={handleSubmitAdMP}>
                         <label htmlFor="name">Nom: </label>
                         <input name="name" type="text" defaultValue={pieceCommercialeMP.value} onChange={handeChangeAddMP} placeholder="blood" required/>
                         <label htmlFor="quantity">Quantité</label>
                         <input name="quantity" type="number" defaultValue="0" onChange={handeChangeAddMP} placeholder="0" required/>
-                        <button>Ajouter!</button>
+                        <Button variant="dark">Ajouter!</Button>
                     </form>
+                    </h4>
                 </div>
             </div>
             <div>

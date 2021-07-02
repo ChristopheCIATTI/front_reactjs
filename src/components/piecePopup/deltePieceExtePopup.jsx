@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { deletePieceCommerciale } from "../../services/PieceApi"
+import { Button } from "react-bootstrap";
 
 export default function DeletePieceExtePopup(piece) {
     const deletePiece = () => {
@@ -10,7 +11,7 @@ export default function DeletePieceExtePopup(piece) {
         <section>
             <h3>
                 Etes vous sure de vouloir supprimer cette piece
-            <button onClick={deletePiece}>Supprimer definitevement</button>
+            <Button variant="danger" onClick={deletePiece}>Supprimer definitevement</Button>
             </h3>
         </section>
     )

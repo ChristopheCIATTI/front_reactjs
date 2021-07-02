@@ -1,6 +1,6 @@
 import Modal from 'react-modal';
 import { useEffect, useState } from "react";
-import { Button, FormLabel } from "react-bootstrap";
+import { Button, FormLabel, Table } from "react-bootstrap";
 import { 
     getAllGame, 
     getAllGammeOperation, 
@@ -22,6 +22,10 @@ import {
     insertRealisation,
     insertRealisationOperation
 } from "../services/AtelierApi";
+
+import CreatePiecePopup from "../components/piecePopup/createPiecePopup";
+import CreatePieceInte from "../components/piecePopup/createPieceInte";
+import CreatePieceExte from "../components/piecePopup/createPieceExtePopup";
 
 export default function Atelier() {
 
@@ -62,11 +66,16 @@ export default function Atelier() {
     const machineArray = []
     const ouvrierArray = []
 
+    const [popupCreateC, setPopupCreateC] = useState(false)
+    const [popCreatePieceInte, setPopCreatePieceInte] = useState(false)
+    const [popCreatePieceExte, setPopCreatePieceExte] = useState(false)
+
     let posteQualificationId = []
 
     let gammeOperationId = []
     let operationPosteId = []
 
+    let inserPieceComeId = null
 
     const [popupCreer, setPopupCreer] = useState(false)
     const setPopupCreerToTrue = () => {
@@ -83,6 +92,29 @@ export default function Atelier() {
     const setShowCreerPieceToFalse = () => {
         setShowCreerPiece(false)
     }
+    const setPopupCreateCToTrue = () => {
+        setPopupCreateC(true)
+    }
+    const setPopupCreateCToFalse = () => {
+        setPopupCreateC(false)
+    }
+    const setPopupCreatePieceInteToTrue = () => {
+        setPopCreatePieceInte(true)
+    }
+    const setPopupCreatePieceInteToFalse = () => {
+        setPopCreatePieceInte(false)
+    }
+    const setPopupCreatePieceExteToTrue = () => {
+        setPopCreatePieceExte(true)
+    }
+    const setPopupCreatePieceExteToFalse = () => {
+        setPopCreatePieceExte(false)
+    }
+    const pieceType = [
+        {type: "piece commerciale", create: setPopupCreateCToTrue},
+        {type: "piece intermedaire", create: setPopCreatePieceInte},
+        {type: "piece exterieure", create: setPopupCreatePieceExteToTrue}
+    ]
 
     useEffect(async () => {
         const gammeData = await getAllGame()
@@ -258,32 +290,52 @@ export default function Atelier() {
    }
 
     const handleChangeCreatePiece = (event) => {
-        const value = event.target.value
-        const name = event.target.name
+        const value = event.currentTarget.value
+        const name = event.currentTarget.name
         setCreerPiece({...creerPiece, [name]: value})
     }
 
     console.log(creerPiece)
 
     const handleSubmitCreatePiece = (event) => {
-        console.log(creerPiece)
+        event.preventDefault()
     }
 
     return(
         <section>
-            <Button onClick={setPopupCreerToTrue}>Creer une piece</Button>
+            <Button variant="dark" onClick={setPopupCreerToTrue}>Creer une piece</Button>
             <p>Gammes d'operation disponible</p>
+            <Table bordered hover>
+                <tbody>
                 {gammeArray}
+                </tbody>
+            </Table>
                 <p>Operration Disponible</p>
+            <Table bordered hover>
+                <tbody>
                 {gammeOperationArray}
+                </tbody>
+            </Table>
                 <p>Poste</p>
+            <Table bordered hover>
+                <tbody>
                 {operationPosteId}
+                </tbody>
+            </Table>
                 <p>Machine</p>
+            <Table bordered hover>
+                <tbody>
                 {machineArray}
+                </tbody>
+            </Table>
                 <p>Ouvrier</p>
+            <Table bordered hover>
+                <tbody>
                 {ouvrierArray}
+                </tbody>
+            </Table>
             <Modal isOpen={popupCreer}>
-                <button onClick={setPopupCreerToFalse}>X</button>
+                <Button variant="outline-light" onClick={setPopupCreerToFalse}>&#x274c;</Button>
                 <form onSubmit={handeSubmit}>
                     <h5>Selectioner une Gamme</h5>
                     {gamme.map((gamme, index) => (
@@ -340,18 +392,23 @@ export default function Atelier() {
                     <input onChange={handleChange} type="text" name="name" required/>
 
                     <br/>
-                    <button onClick={setShowCreerPieceToTrue}>Etape suivante</button>
+                    <Button variant="success" onClick={setShowCreerPieceToTrue}>Etape suivante</Button>
                     {showCreerPiece ? 
                         <>
-                        <form handeSubmit={handleSubmitCreatePiece}>
-                            <label>Nom de la piece</label>
-                            <input handleChange={handleChangeCreatePiece} name="name" value={creerPiece.name} type="text" placeholder="pieceXXX" required/>
-                            <br/>
-                            <label>Quantite</label>
-                            <input handleChange={handleChangeCreatePiece} name="quantity" value={creerPiece.quantity} type="number" placeholder="0" required/>
-                            <br/>
-                            <button>Ajouter la piece</button>
-                        </form>
+                        <br/>
+                        {pieceType.map((pieceType, index) => (<><Button onClick={pieceType.create} variant="outline-dark">{pieceType.type}</Button><br/></>))}
+                        <Modal isOpen={popupCreateC}>
+                            <Button variant="outline-light" onClick={setPopupCreateCToFalse}>&#x274c;</Button>
+                            <CreatePiecePopup pieceId={inserPieceComeId}/>
+                        </Modal>
+                        <Modal isOpen={popCreatePieceInte}>
+                            <Button variant="outline-light" onClick={setPopupCreatePieceInteToFalse}>&#x274c;</Button>
+                            <CreatePieceInte/>
+                        </Modal>
+                        <Modal isOpen={popCreatePieceExte}>
+                            <button onClick={setPopupCreatePieceExteToFalse}>X</button>
+                            <CreatePieceExte/>
+                        </Modal>
                         </>
                     : null}
                 </form>

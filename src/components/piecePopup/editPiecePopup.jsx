@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { updatePieceCommerciale } from "../../services/PieceApi"
 import InputLabel from "../form/inputLabel"
+import { Button } from "react-bootstrap";
 
 export default function EditPiecePopup(props) {
     
@@ -28,14 +29,15 @@ export default function EditPiecePopup(props) {
     return(
         <section>
             <div>
-                <h3>Editer la piece</h3>
+                <h4>Editer la piece
                 <form onSubmit={handleSubmit}>
                     <InputLabel name="name" value={props.name} change={handleChange} type="text" label="Nom de la piece" placeholder="pieceXXX"/>
                     <InputLabel name="designation" value={props.designation} change={handleChange} type="text" label="Nom commercial" placeholder="pieceXXX"/>
                     <InputLabel name="quantity" value={props.quantity} change={handleChange} type="number" label="Piece quantite" placeholder="0" />
                     <InputLabel name="price" value={props.price} change={handleChange} type="number" label="Prix d ela piece" placeholder="0.00" step="0.01"/>
-                    <button>Mettre à jour la piece</button>
+                    <Button variant="success">Mettre à jour la piece</Button>
                 </form>
+                </h4>
             </div>
             <div>
                 
