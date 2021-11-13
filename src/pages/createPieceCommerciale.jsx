@@ -52,7 +52,6 @@ export default function CreatePieceCommerciale() {
                 <input type="submit" />
             </form>
         </section>
-
     )    
 }
 
